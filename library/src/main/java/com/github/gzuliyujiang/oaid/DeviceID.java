@@ -81,7 +81,7 @@ public final class DeviceID {
      * @see Application#onCreate()
      */
     public static void register(Application application, IRegisterCallback callback) {
-        register(application, false, null);
+        register(application, false, callback);
     }
 
     /**
@@ -125,6 +125,9 @@ public final class DeviceID {
                 Holder.INSTANCE.clientId = result;
                 Holder.INSTANCE.oaid = result;
                 OAIDLog.print("Client id is OAID/AAID: " + result);
+                if (callback != null) {
+                    callback.onComplete(result, null);
+                }
             }
 
             @Override
